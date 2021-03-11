@@ -9,10 +9,10 @@
 .time-controller {
   width: 50%;
   display: flex;
+  align-items: center;
   input {
     width: 100%;
     //Top & Bottom
-    padding: 1rem 2rem;
     cursor: pointer;
   }
   p {
