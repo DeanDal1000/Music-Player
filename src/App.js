@@ -8,7 +8,7 @@ import data from './util';
 function App() {
   //State
   const [songs, setSongs] = useState(data());
-  const [currentSong, setCurrentSong] = useState(songs[1]);
+  const [currentSong, setCurrentSong] = useState(songs[0]);
   const [playing, setPlaying] = useState(false);
   return (
     <div className="App">
@@ -20,7 +20,7 @@ function App() {
         setPlaying={setPlaying}
         currentSong={currentSong}
       />
-      <Library songs={songs} />
+      <Library songs={songs} setCurrentSong={setCurrentSong} />
     </div>
   );
 }
