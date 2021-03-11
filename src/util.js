@@ -81,6 +81,16 @@ function chillHop() {
       id: uuidv4(),
       active: false,
     },
+    {
+      name: 'Runaway',
+      cover:
+        'https://chillhop.com/wp-content/uploads/2021/01/453b13ae3c0e2eec280fcc6357800b825239806e-300x300.jpg',
+      artist: 'Blue Wednesday, Magnus Klausen',
+      audio: 'https://mp3.chillhop.com/serve.php/?mp3=12136',
+      color: ['#D54948', '#B0CFB0'],
+      id: uuidv4(),
+      active: false,
+    },
   ];
 }
 
