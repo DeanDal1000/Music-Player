@@ -23,6 +23,12 @@ function App() {
     const duration = e.target.duration;
     setSongInfo({ ...songInfo, currentTime: current, duration });
   };
+  //AutoForwardHandler
+  const AutoForwardHandler = async () => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    await setCurrentSong(songs[currentIndex + 1] || songs[0]);
+    if (playing) audioRef.current.play();
+  };
 
   return (
     <div className="App">
@@ -53,6 +59,7 @@ function App() {
         onLoadedMetadata={timeHandler}
         ref={audioRef}
         src={currentSong.audio}
+        onEnded={AutoForwardHandler}
       ></audio>
     </div>
   );
