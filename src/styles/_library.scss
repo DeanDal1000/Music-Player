@@ -6,6 +6,9 @@
   height: 100%;
   background-color: white;
   box-shadow: 2px 2px 50px rgb(230, 223, 223);
+  transform: translate(-100%);
+  transition: all 0.5s;
+  opacity: 0;
   overflow: scroll;
   h2 {
     padding: 2rem;
@@ -57,4 +60,10 @@
 
 .selected {
   background-color: lightsteelblue;
+}
+
+//for library transition
+.active-library {
+  transform: translateX(0%);
+  opacity: 1;
 }
