@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlay,
@@ -14,8 +14,27 @@ const Player = ({
   audioRef,
   setSongInfo,
   songInfo,
+  songs,
+  setCurrentSong,
+  setSongs,
 }) => {
-  //Ref
+  useEffect(() => {
+    const newSongs = songs.map((song) => {
+      if (song.id === currentSong.id) {
+        return {
+          ...song,
+          active: true,
+        };
+      } else {
+        return {
+          ...song,
+          active: false,
+        };
+      }
+    });
+    setSongs(newSongs);
+  }, [currentSong]);
+
   //Event Handlers
   const playSong = () => {
     if (playing) {
@@ -41,6 +60,16 @@ const Player = ({
     );
   };
 
+  //Skip Back & Forward
+  const skipHandler = (direction) => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    if (direction === 'skip-forward') {
+      setCurrentSong(songs[currentIndex + 1] || songs[0]);
+    } else if (direction === 'skip-back') {
+      setCurrentSong(songs[currentIndex - 1] || songs[songs.length - 1]);
+    }
+  };
+
   return (
     <div className="player-container">
       <div className="time-controller">
@@ -55,14 +84,24 @@ const Player = ({
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-controller">
-        <FontAwesomeIcon className="back" size="3x" icon={faAngleLeft} />
+        <FontAwesomeIcon
+          onClick={() => skipHandler('skip-back')}
+          className="back"
+          size="3x"
+          icon={faAngleLeft}
+        />
         <FontAwesomeIcon
           onClick={playSong}
           className="play"
           size="3x"
           icon={playing ? faPause : faPlay}
         />
-        <FontAwesomeIcon className="forward" size="3x" icon={faAngleRight} />
+        <FontAwesomeIcon
+          onClick={() => skipHandler('skip-forward')}
+          className="forward"
+          size="3x"
+          icon={faAngleRight}
+        />
       </div>
     </div>
   );
